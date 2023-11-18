@@ -38,3 +38,5 @@ WebApplication1/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 WebApplication1/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll
 
 .vs/WebApp1/v17/.futdcache.v1
+
+*.dll
