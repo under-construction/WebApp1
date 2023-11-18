@@ -5,7 +5,6 @@ namespace WebApp.Entities
 {
     public class Person
     {
-        public Guid GUID { get; set; }
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
