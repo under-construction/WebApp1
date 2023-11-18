@@ -14,8 +14,8 @@ namespace WebApp.Context
         {
             modelBuilder.Entity<Person>().HasData
             (
-                new Person { GUID = Guid.NewGuid(), ID = 1, Name = "Ercument", Surname = "Kalkan", Age = 28 },
-                new Person { GUID = Guid.NewGuid(), ID = 2, Name = "Ezgi", Surname = "Gulsen", Age = 27 }
+                new Person { ID = 1, Name = "Ercument", Surname = "Kalkan", Age = 28 },
+                new Person { ID = 2, Name = "Ezgi", Surname = "Gulsen", Age = 27 }
             );
         }
     }

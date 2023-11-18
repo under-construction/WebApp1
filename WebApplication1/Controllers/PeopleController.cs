@@ -34,7 +34,7 @@ namespace WebApp.Controllers
 
         // GET: api/People/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPerson(Guid id)
+        public async Task<ActionResult<Person>> GetPerson(int id)
         {
           if (_context.Person == null)
           {
@@ -98,7 +98,7 @@ namespace WebApp.Controllers
 
         // DELETE: api/People/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePerson(Guid id)
+        public async Task<IActionResult> DeletePerson(int id)
         {
             if (_context.Person == null)
             {
