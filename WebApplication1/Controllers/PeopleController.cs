@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApp.Context;
 using WebApp.Entities;
+using WebApp.Repository;
 
 namespace WebApp.Controllers
 {
@@ -14,111 +15,71 @@ namespace WebApp.Controllers
     [ApiController]
     public class PeopleController : ControllerBase
     {
-        private readonly PersonContext _context;
+        private readonly IRepository<Person> _repository;
 
-        public PeopleController(PersonContext context)
+        public PeopleController(IRepository<Person> repository)
         {
-            _context = context;
+            _repository = repository;
         }
 
         // GET: api/People
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Person>>> GetPerson()
+        public async Task<IEnumerable<Person>> GetAll()
         {
-          if (_context.Person == null)
-          {
-              return NotFound();
-          }
-            return await _context.Person.ToListAsync();
+            return await _repository.GetAll();
         }
 
         // GET: api/People/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Person>> GetPerson(int id)
+        public async Task<Person?> GetById(int id)
         {
-          if (_context.Person == null)
-          {
-              return NotFound();
-          }
-            var person = await _context.Person.FindAsync(id);
-
-            if (person == null)
-            {
-                return NotFound();
-            }
-
-            return person;
+            return await _repository.GetById(id);
         }
 
         // PUT: api/People/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPerson(int id, Person person)
+        public async Task Update(int id, Person person)
         {
-            if (id != person.ID)
-            {
-                return BadRequest();
-            }
+            //if (id != person.ID)
+            //{
+            //    return BadRequest();
+            //}
 
-            _context.Entry(person).State = EntityState.Modified;
+            //_context.Entry(person).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!PersonExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            //try
+            //{
+            //    await _context.SaveChangesAsync();
+            //}
+            //catch (DbUpdateConcurrencyException)
+            //{
+            //    if (!PersonExists(id))
+            //    {
+            //        return NotFound();
+            //    }
+            //    else
+            //    {
+            //        throw;
+            //    }
+            //}
 
-            return NoContent();
+            //return NoContent();
         }
 
         // POST: api/People
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Person>> PostPerson(Person person)
+        public async Task<Person> Insert(Person person)
         {
-          if (_context.Person == null)
-          {
-              return Problem("Entity set 'PersonContext.Person'  is null.");
-          }
-            _context.Person.Add(person);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetPerson", new { id = person.ID }, person);
+          return await _repository.InsertAsync(person);
         }
 
         // DELETE: api/People/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePerson(int id)
+        public async Task Delete(int id)
         {
-            if (_context.Person == null)
-            {
-                return NotFound();
-            }
-            var person = await _context.Person.FindAsync(id);
-            if (person == null)
-            {
-                return NotFound();
-            }
-
-            _context.Person.Remove(person);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool PersonExists(int id)
-        {
-            return (_context.Person?.Any(e => e.ID == id)).GetValueOrDefault();
+            await _repository.DeleteAsync(id);
         }
     }
 }
