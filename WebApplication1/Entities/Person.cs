@@ -11,6 +11,7 @@ namespace WebApp.Entities
         public string? Name { get; set; }
         public string? Surname { get; set; }
         public int Age { get; set; } = 0;
+        public DateTime? BirthDate { get; set; }
         public int TotalMoney { get; set; } = 0;
 
     }
