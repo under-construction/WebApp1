@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using WebApp.Context;
 using WebApp.Entities;
 using WebApp.Repository;
@@ -38,9 +37,9 @@ namespace WebApp.Controllers
 
         // PUT: api/People/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task Update(int id, Person person)
-        {
+        //[HttpPut("{id}")]
+        //public async Task Update(int id, Person person)
+        //{
             //if (id != person.ID)
             //{
             //    return BadRequest();
@@ -65,7 +64,7 @@ namespace WebApp.Controllers
             //}
 
             //return NoContent();
-        }
+        //}
 
         // POST: api/People
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
