@@ -12,25 +12,25 @@ namespace WebApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PeopleController : ControllerBase
+    public class DepositTypeController : ControllerBase
     {
-        private readonly IRepository<Person> _repository;
+        private readonly IRepository<DepositType> _repository;
 
-        public PeopleController(IRepository<Person> repository)
+        public DepositTypeController(IRepository<DepositType> repository)
         {
             _repository = repository;
         }
 
         // GET: api/People
         [HttpGet]
-        public async Task<IEnumerable<Person>> GetAll()
+        public async Task<IEnumerable<DepositType>> GetAll()
         {
             return await _repository.GetAll();
         }
 
         // GET: api/People/5
         [HttpGet("{id}")]
-        public async Task<Person?> GetById(int id)
+        public async Task<DepositType?> GetById(int id)
         {
             return await _repository.GetById(id);
         }
@@ -69,9 +69,9 @@ namespace WebApp.Controllers
         // POST: api/People
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<Person> Insert(Person person)
+        public async Task<DepositType> Insert(DepositType depositType)
         {
-          return await _repository.InsertAsync(person);
+          return await _repository.InsertAsync(depositType);
         }
 
         // DELETE: api/People/5
