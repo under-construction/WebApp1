@@ -10,9 +10,30 @@ namespace WebApp.Context
 
         }
         public DbSet<Person>? Person { get; set; }
+        public DbSet<Deposit>? Deposits { get; set; }
+        public DbSet<DepositType>? DepositTypes { get; set; }
+        public DbSet<Currency>? Currencies { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var entries = ChangeTracker.Entries().Where(e => e.Entity is BaseEntity && (e.State == EntityState.Added || e.State == EntityState.Modified));
+
+            foreach (var entry in entries)
+            {
+                ((BaseEntity)entry.Entity).UpdatedDate = DateTime.Now;
+
+                if (entry.State == EntityState.Added)
+                {
+                    ((BaseEntity)entry.Entity).CreatedDate = DateTime.Now;
+                }
+            }
+
+            return await base.SaveChangesAsync(cancellationToken);
         }
     }
 }
