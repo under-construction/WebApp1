@@ -47,7 +47,7 @@ namespace WebApp.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Person");
+                    b.ToTable("Person", (string)null);
                 });
 #pragma warning restore 612, 618
         }

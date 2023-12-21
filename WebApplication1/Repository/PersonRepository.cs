@@ -1,59 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WebApp.Context;
 using WebApp.Entities;
+using WebApp.IRepository;
 
 namespace WebApp.Repository
 {
-    public class PersonRepository : IRepository<Person>
+    public class PersonRepository : Repository<Person>, IPersonRepository
     {
         PersonContext _context;
 
-        public PersonRepository(PersonContext context)
+        public PersonRepository(PersonContext context) : base(context)
         {
-            _context = context;
+            _context = context;    
         }
 
-        public async Task<IEnumerable<Person>> GetAll()
+        public Task<IQueryable<Person>> GetPeopleOlderThan(int age)
         {
-            return await _context.Set<Person>().AsNoTracking().ToListAsync();
-        }
-
-        public async Task<Person> InsertAsync(Person entity)
-        {
-            await _context.Set<Person>().AddAsync(entity);
-            await _context.SaveChangesAsync();
-
-            return entity;
-        }
-
-        public async Task DeleteAsync(int id)
-        {
-            Person? entity = await _context.Set<Person>().FindAsync(id);
-
-            if (entity == null)
-            {
-                throw new NullReferenceException("Object is null.");
-            }
-
-            _context.Set<Person>().Remove(entity);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task<Person> GetById(int id)
-        {
-            Person? entity = await _context.Set<Person>().FindAsync(id);
-
-            if (entity == null)
-            {
-                throw new NullReferenceException("Object is null.");
-            }
-
-            return entity;
-        }
-
-        public Task<Person> UpdateAsync(Person entity)
-        {
-            throw new NotImplementedException();
+            return (Task<IQueryable<Person>>)_context.Set<Person>().Where(i => i.Age > age);
         }
     }
 }
