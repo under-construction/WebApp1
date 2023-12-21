@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WebApp.Context;
 using WebApp.Entities;
+using WebApp.IRepository;
 using WebApp.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +16,8 @@ builder.Services.AddDbContext<PersonContext>(opt => opt.UseSqlServer(builder.Con
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IRepository<Person>, PersonRepository>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 var app = builder.Build();
 
