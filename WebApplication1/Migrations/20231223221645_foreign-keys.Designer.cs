@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApp.Context;
 
@@ -11,9 +12,10 @@ using WebApp.Context;
 namespace WebApp.Migrations
 {
     [DbContext(typeof(PersonContext))]
-    partial class PersonContextModelSnapshot : ModelSnapshot
+    [Migration("20231223221645_foreign-keys")]
+    partial class foreignkeys
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,7 +66,10 @@ namespace WebApp.Migrations
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DepositTypeId")
+                    b.Property<int?>("DepositTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DeposityTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("PersonId")
@@ -150,9 +155,7 @@ namespace WebApp.Migrations
 
                     b.HasOne("WebApp.Entities.DepositType", null)
                         .WithMany("Deposits")
-                        .HasForeignKey("DepositTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepositTypeId");
 
                     b.HasOne("WebApp.Entities.Person", null)
                         .WithMany("Deposits")

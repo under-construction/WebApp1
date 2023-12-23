@@ -14,7 +14,7 @@ namespace WebApp.Entities
         public DateTime? BirthDate { get; set; }
         public int TotalMoney { get; set; } = 0;
 
-        [NotMapped]
-        public IEnumerable<Deposit>? Deposits { get; set; }
+        //[NotMapped]
+        public IEnumerable<Deposit> Deposits { get; set; } = new List<Deposit>();
     }
 }

@@ -10,7 +10,7 @@ namespace WebApp.Entities
         public int ID { get; set; }
         public string? Name { get; set; }
 
-        [NotMapped]
-        public IEnumerable<Deposit>? Deposits { get; set; }
+        //[NotMapped]
+        public IEnumerable<Deposit> Deposits { get; set; } = new List<Deposit>();
     }
 }
