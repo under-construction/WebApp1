@@ -12,16 +12,16 @@ namespace WebApp.Entities
         public DateTime? Date { get; set; } = DateTime.Now;
 
         public int PersonId { get; set; }
-        //[NotMapped]
-        //public Person? Person { get; set; }
-        
+        [NotMapped]
+        public Person? Person { get; set; }
+
         public int DepositTypeId { get; set; }
-        //[NotMapped]
-        //public DepositType? DepositType { get; set; }
+        [NotMapped]
+        public DepositType? DepositType { get; set; }
 
         public int CurrencyId { get; set; }
-        //[NotMapped]
-        //public Currency? Currency { get; set; }
+        [NotMapped]
+        public Currency? Currency { get; set; }
 
     }
 }
