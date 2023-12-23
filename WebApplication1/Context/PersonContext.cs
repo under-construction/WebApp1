@@ -16,7 +16,9 @@ namespace WebApp.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Person>().Navigation(p => p.Deposits).AutoInclude();
+            modelBuilder.Entity<DepositType>().Navigation(d => d.Deposits).AutoInclude();
+            modelBuilder.Entity<Currency>().Navigation(c => c.Deposits).AutoInclude();
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
