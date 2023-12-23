@@ -14,9 +14,9 @@ namespace WebApp.Controllers
     [ApiController]
     public class PeopleController : ControllerBase
     {
-        private readonly IRepository<Person> _repository;
+        private readonly IPersonRepository _repository;
 
-        public PeopleController(IRepository<Person> repository)
+        public PeopleController(IPersonRepository repository)
         {
             _repository = repository;
         }

@@ -14,9 +14,9 @@ namespace WebApp.Controllers
     [ApiController]
     public class DepositTypeController : ControllerBase
     {
-        private readonly IRepository<DepositType> _repository;
+        private readonly IDepositTypeRepository _repository;
 
-        public DepositTypeController(IRepository<DepositType> repository)
+        public DepositTypeController(IDepositTypeRepository repository)
         {
             _repository = repository;
         }
